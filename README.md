@@ -1,4 +1,4 @@
-# supplier-risk-kg
+# Supplier-Risk Case Study using OWL, SHACL and SPARQL
 
 **A hands-on learning path for knowledge graphs with OWL, SHACL and SPARQL,
 built around one business question:**
