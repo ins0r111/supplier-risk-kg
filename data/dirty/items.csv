@@ -1,0 +1,26 @@
+item_id,name,item_type
+P-100,Window lift drive,Product
+P-200,Seat adjustment motor,Product
+P-300,Wiper motor,Product
+P-400,Sunroof drive,Product
+P-500,Power tailgate drive,Product
+A-10,Motor unit,Assembly
+A-20,Gear unit,Assembly
+A-30,Electronic control unit,Assembly
+A-31,PCB assembly,Assembly
+A-40,Sealing kit,Assembly
+T-01,Copper winding,Part
+T-02,NdFeB magnet,Part
+T-03,Ball bearing,Part
+T-04,Motor housing,Part
+T-05,Worm gear,Part
+T-06,Spur gear,Part
+T-07,Gear housing,Part
+T-08,ECU housing,Part
+T-09,Connector,Part
+T-10,Microcontroller,Part
+T-11,Hall sensor,Part
+T-12,Bare PCB,Part
+T-13,Sealing ring,Part
+T-14,Screw set,Part
+T-15,Spindle,Part

@@ -1,0 +1,36 @@
+# CQ2: How much order value depends on supplier S3?
+#
+# An order can depend on S3 through several parts (microcontroller, Hall
+# sensor, connector). The subquery collects each affected order ONCE before
+# summing; joining directly would count such orders several times.
+# Runs on the REASONED graph (srk:hasComponent).
+
+PREFIX srk: <https://example.org/supplier-risk-kg/ontology#>
+
+SELECT ?affectedOrders ?affectedValue ?totalValue
+       (ROUND(100 * ?affectedValue / ?totalValue) AS ?sharePercent)
+WHERE {
+  {
+    SELECT (COUNT(?order) AS ?affectedOrders)
+           (SUM(?quantity * ?unitPrice) AS ?affectedValue)
+    WHERE {
+      {
+        SELECT DISTINCT ?order WHERE {
+          VALUES ?supplier { <https://example.org/supplier-risk-kg/id/supplier/S3> }
+          ?part    srk:suppliedBy     ?supplier .
+          ?product srk:hasComponent   ?part .
+          ?order   srk:orderedProduct ?product .
+        }
+      }
+      ?order srk:quantity ?quantity ;
+             srk:unitPrice ?unitPrice .
+    }
+  }
+  {
+    SELECT (SUM(?q * ?p) AS ?totalValue) WHERE {
+      ?o a srk:Order ;
+         srk:quantity ?q ;
+         srk:unitPrice ?p .
+    }
+  }
+}

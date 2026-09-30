@@ -1,0 +1,16 @@
+crm_id,name,country,segment,vat_id,key_account_manager
+ACC-1001,Rheinstahl Fahrzeugbau AG,DE,OEM,DE786579303,J. Keller
+ACC-1002,Voltaris Mobility GmbH,DE,OEM,DE126855092,A. Brandt
+ACC-1003,Hansekraft Automobile SE,DE,OEM,DE362950628,M. Yilmaz
+ACC-1004,Isartal Motorenwerke AG,DE,OEM,DE249827706,S. Novak
+ACC-1005,Moselwerk Fahrzeuge GmbH,DE,Tier 1,DE826600539,L. Hoffmann
+ACC-1006,Oderbruch Nutzfahrzeuge AG,DE,Commercial vehicles,DE734036506,K. Petrova
+ACC-1007,Lechfeld E-Mobil GmbH,,OEM,DE134126396,T. Schneider
+ACC-1008,Danubia Fahrzeugtechnik GmbH,AT,Tier 1,AT200604502,E. Rossi
+ACC-1009,Loire Mobilite SAS,FR,OEM,FR349817734,F. Dubois
+ACC-1010,Ebro Vehiculos S.L.,ES,OEM,ES702632297,N. Kowalski
+ACC-1011,Padania Automotive S.p.A.,IT,OEM,IT868820204,C. Fischer
+ACC-1012,Moravia Automotive a.s.,CZ,Tier 1,CZ336696312,D. Horvat
+ACC-1013,Vistula Auto S.A.,PL,OEM,PL732719211,R. Lindqvist
+ACC-1014,Carpathia Motors S.R.L.,RO,Commercial vehicles,RO969119330,P. Martins
+ACC-1015,Nordkap Electric Vehicles AS,NO,OEM,NO914763202,H. Wagner

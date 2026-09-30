@@ -1,0 +1,269 @@
+@prefix srk:     <https://example.org/supplier-risk-kg/ontology#> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+@prefix skos:    <http://www.w3.org/2004/02/skos/core#> .
+@prefix prov:    <http://www.w3.org/ns/prov#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+
+# ==========================================================================
+# Ontology header
+# ==========================================================================
+
+<https://example.org/supplier-risk-kg/ontology>
+    a owl:Ontology ;
+    dcterms:title "Supplier Risk Ontology"@en ;
+    dcterms:description """A small ontology linking customers, orders, products,
+the bill of materials and suppliers across CRM, ERP, PLM and SRM, so that
+supply risks can be traced to the customers they affect."""@en ;
+    owl:versionInfo "0.1.0" .
+
+# SKOS and Dublin Core terms are used as annotations on OWL entities.
+skos:prefLabel   a owl:AnnotationProperty .
+skos:altLabel    a owl:AnnotationProperty .
+skos:definition  a owl:AnnotationProperty .
+dcterms:title    a owl:AnnotationProperty .
+dcterms:description a owl:AnnotationProperty .
+
+# ==========================================================================
+# Organizations: the real-world companies
+# ==========================================================================
+
+srk:Organization
+    a owl:Class ;
+    skos:prefLabel "Organisation"@de, "Organization"@en ;
+    skos:definition "A real-world company, independent of how any system records it."@en .
+
+srk:Customer
+    a owl:Class ;
+    rdfs:subClassOf srk:Organization ;
+    skos:prefLabel "Kunde"@de, "Customer"@en ;
+    skos:altLabel "Auftraggeber"@de, "Debitor"@de, "Account"@en, "Client"@en ;
+    skos:definition "An organization that orders products from us."@en .
+
+srk:Supplier
+    a owl:Class ;
+    rdfs:subClassOf srk:Organization ;
+    skos:prefLabel "Lieferant"@de, "Supplier"@en ;
+    skos:altLabel "Zulieferer"@de, "Kreditor"@de, "Vendor"@en ;
+    skos:definition "An organization that delivers parts to us."@en .
+
+# Customer and Supplier are deliberately NOT disjoint:
+# the same company can buy from us and sell to us.
+
+# ==========================================================================
+# Records: what a source system stores about an organization
+#
+# Design decision: CRM and ERP each hold their own record of a customer.
+# Instead of merging the two with owl:sameAs, both records point to one
+# canonical srk:Customer via srk:describes. Each record keeps its own ID,
+# spelling and provenance, and an unmatched record stays visible as a
+# data quality issue instead of silently disappearing.
+# ==========================================================================
+
+srk:Record
+    a owl:Class ;
+    rdfs:subClassOf prov:Entity ;
+    owl:disjointWith srk:Organization ;
+    skos:prefLabel "Datensatz"@de, "Record"@en ;
+    skos:definition "An entry in a source system that describes an organization."@en .
+
+srk:CrmAccount
+    a owl:Class ;
+    rdfs:subClassOf srk:Record ;
+    skos:prefLabel "CRM-Account"@de, "CRM account"@en .
+
+srk:ErpCustomerRecord
+    a owl:Class ;
+    rdfs:subClassOf srk:Record ;
+    skos:prefLabel "ERP-Debitorenstamm"@de, "ERP customer record"@en .
+
+srk:SourceSystem
+    a owl:Class ;
+    rdfs:subClassOf prov:SoftwareAgent ;
+    skos:prefLabel "Quellsystem"@de, "Source system"@en ;
+    skos:definition "An operational system that records business data (CRM, ERP, PLM, SRM)."@en .
+
+srk:describes
+    a owl:ObjectProperty, owl:FunctionalProperty ;
+    rdfs:domain srk:Record ;
+    rdfs:range srk:Organization ;
+    skos:prefLabel "beschreibt"@de, "describes"@en ;
+    skos:definition "Links a source-system record to the real-world organization it is about."@en .
+
+# ==========================================================================
+# Items and the bill of materials
+# ==========================================================================
+
+srk:Item
+    a owl:Class ;
+    skos:prefLabel "Material"@de, "Item"@en ;
+    skos:definition "Anything that appears in the bill of materials."@en .
+
+srk:Product
+    a owl:Class ;
+    rdfs:subClassOf srk:Item ;
+    skos:prefLabel "Produkt"@de, "Product"@en ;
+    skos:altLabel "Fertigerzeugnis"@de, "Finished good"@en ;
+    skos:definition "An item that customers can order."@en .
+
+srk:Assembly
+    a owl:Class ;
+    rdfs:subClassOf srk:Item ;
+    skos:prefLabel "Baugruppe"@de, "Assembly"@en ;
+    skos:altLabel "Unterbaugruppe"@de, "Sub-assembly"@en ;
+    skos:definition "An item built from other items."@en .
+
+srk:Part
+    a owl:Class ;
+    rdfs:subClassOf srk:Item ;
+    skos:prefLabel "Bauteil"@de, "Part"@en ;
+    skos:altLabel "Zukaufteil"@de, "Komponente"@de, "Component"@en ;
+    skos:definition "A purchased item that is delivered by a supplier."@en .
+
+[] a owl:AllDisjointClasses ;
+   owl:members ( srk:Product srk:Assembly srk:Part ) .
+
+# Design decision: the direct parent-child relation is asserted from the
+# BOM; its transitive super-property lets a reasoner infer every item that
+# is contained at any depth (product -> assembly -> sub-assembly -> part).
+
+srk:hasComponent
+    a owl:ObjectProperty, owl:TransitiveProperty ;
+    rdfs:domain srk:Item ;
+    rdfs:range srk:Item ;
+    skos:prefLabel "enthält"@de, "has component"@en ;
+    skos:definition "The item contains the other item at any depth of the bill of materials."@en .
+
+srk:hasDirectComponent
+    a owl:ObjectProperty ;
+    rdfs:subPropertyOf srk:hasComponent ;
+    skos:prefLabel "enthält direkt"@de, "has direct component"@en ;
+    skos:definition "The item contains the other item one level down in the bill of materials."@en .
+
+# Design decision: a BOM line carries a quantity, i.e. an attribute of the
+# relation itself. RDF cannot attach attributes to an edge, so the line is
+# modelled as its own node (a property-graph edge becomes a class).
+
+srk:BomLine
+    a owl:Class ;
+    skos:prefLabel "Stücklistenposition"@de, "BOM line"@en ;
+    skos:definition "One parent-child entry of the bill of materials, with its quantity."@en .
+
+srk:parentItem
+    a owl:ObjectProperty, owl:FunctionalProperty ;
+    rdfs:domain srk:BomLine ;
+    rdfs:range srk:Item ;
+    skos:prefLabel "übergeordnetes Material"@de, "parent item"@en .
+
+srk:childItem
+    a owl:ObjectProperty, owl:FunctionalProperty ;
+    rdfs:domain srk:BomLine ;
+    rdfs:range srk:Item ;
+    skos:prefLabel "untergeordnetes Material"@de, "child item"@en .
+
+srk:suppliedBy
+    a owl:ObjectProperty ;
+    rdfs:domain srk:Part ;
+    rdfs:range srk:Supplier ;
+    skos:prefLabel "geliefert von"@de, "supplied by"@en .
+
+# ==========================================================================
+# Orders
+# ==========================================================================
+
+srk:Order
+    a owl:Class ;
+    rdfs:subClassOf prov:Entity ;
+    skos:prefLabel "Auftrag"@de, "Order"@en ;
+    skos:altLabel "Kundenauftrag"@de, "Sales order"@en .
+
+srk:placedBy
+    a owl:ObjectProperty, owl:FunctionalProperty ;
+    rdfs:domain srk:Order ;
+    rdfs:range srk:ErpCustomerRecord ;
+    skos:prefLabel "erfasst für"@de, "placed by"@en ;
+    skos:definition "The ERP customer record the order was booked against."@en .
+
+# Design decision: orders live in the ERP and only know ERP customer IDs.
+# The property chain lets a reasoner connect an order to the real customer:
+# order --placedBy--> ERP record --describes--> customer.
+
+srk:orderedBy
+    a owl:ObjectProperty ;
+    owl:propertyChainAxiom ( srk:placedBy srk:describes ) ;
+    rdfs:domain srk:Order ;
+    rdfs:range srk:Customer ;
+    skos:prefLabel "bestellt von"@de, "ordered by"@en .
+
+srk:orderedProduct
+    a owl:ObjectProperty, owl:FunctionalProperty ;
+    rdfs:domain srk:Order ;
+    rdfs:range srk:Product ;
+    skos:prefLabel "bestelltes Produkt"@de, "ordered product"@en .
+
+# ==========================================================================
+# Datatype properties
+# ==========================================================================
+
+srk:identifier
+    a owl:DatatypeProperty ;
+    rdfs:range xsd:string ;
+    skos:prefLabel "Kennung"@de, "identifier"@en ;
+    skos:definition "The business key of a record, item, supplier or order in its source system."@en .
+
+srk:vatId
+    a owl:DatatypeProperty ;
+    rdfs:domain srk:Record ;
+    rdfs:range xsd:string ;
+    skos:prefLabel "USt-IdNr."@de, "VAT ID"@en .
+
+srk:recordName
+    a owl:DatatypeProperty ;
+    rdfs:domain srk:Record ;
+    rdfs:range xsd:string ;
+    skos:prefLabel "Name im Quellsystem"@de, "name in source system"@en .
+
+srk:country
+    a owl:DatatypeProperty ;
+    rdfs:domain srk:Organization ;
+    rdfs:range xsd:string ;
+    skos:prefLabel "Land"@de, "country"@en ;
+    skos:definition "ISO 3166-1 alpha-2 country code."@en .
+
+srk:segment
+    a owl:DatatypeProperty ;
+    rdfs:domain srk:Customer ;
+    rdfs:range xsd:string ;
+    skos:prefLabel "Segment"@de, "segment"@en .
+
+srk:keyAccountManager
+    a owl:DatatypeProperty ;
+    rdfs:domain srk:Customer ;
+    rdfs:range xsd:string ;
+    skos:prefLabel "Key-Account-Manager"@de, "key account manager"@en .
+
+srk:paymentTermsDays
+    a owl:DatatypeProperty ;
+    rdfs:domain srk:ErpCustomerRecord ;
+    rdfs:range xsd:integer ;
+    skos:prefLabel "Zahlungsziel (Tage)"@de, "payment terms (days)"@en .
+
+srk:quantity
+    a owl:DatatypeProperty ;
+    rdfs:range xsd:integer ;
+    skos:prefLabel "Menge"@de, "quantity"@en ;
+    skos:definition "Number of units, on an order or a BOM line."@en .
+
+srk:unitPrice
+    a owl:DatatypeProperty ;
+    rdfs:domain srk:Order ;
+    rdfs:range xsd:decimal ;
+    skos:prefLabel "Stückpreis (EUR)"@de, "unit price (EUR)"@en .
+
+srk:orderDate
+    a owl:DatatypeProperty ;
+    rdfs:domain srk:Order ;
+    rdfs:range xsd:date ;
+    skos:prefLabel "Auftragsdatum"@de, "order date"@en .

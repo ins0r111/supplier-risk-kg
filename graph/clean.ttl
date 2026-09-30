@@ -1,0 +1,1140 @@
+@prefix bom: <https://example.org/supplier-risk-kg/id/bom/> .
+@prefix crm: <https://example.org/supplier-risk-kg/id/crm/account/> .
+@prefix customer: <https://example.org/supplier-risk-kg/id/customer/> .
+@prefix erp: <https://example.org/supplier-risk-kg/id/erp/customer/> .
+@prefix item: <https://example.org/supplier-risk-kg/id/item/> .
+@prefix order: <https://example.org/supplier-risk-kg/id/erp/order/> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix srk: <https://example.org/supplier-risk-kg/ontology#> .
+@prefix supplier: <https://example.org/supplier-risk-kg/id/supplier/> .
+@prefix system: <https://example.org/supplier-risk-kg/id/system/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+bom:A-10_T-01 a srk:BomLine ;
+    prov:wasAttributedTo system:plm ;
+    srk:childItem item:T-01 ;
+    srk:parentItem item:A-10 ;
+    srk:quantity 1 .
+
+bom:A-10_T-02 a srk:BomLine ;
+    prov:wasAttributedTo system:plm ;
+    srk:childItem item:T-02 ;
+    srk:parentItem item:A-10 ;
+    srk:quantity 2 .
+
+bom:A-10_T-03 a srk:BomLine ;
+    prov:wasAttributedTo system:plm ;
+    srk:childItem item:T-03 ;
+    srk:parentItem item:A-10 ;
+    srk:quantity 2 .
+
+bom:A-10_T-04 a srk:BomLine ;
+    prov:wasAttributedTo system:plm ;
+    srk:childItem item:T-04 ;
+    srk:parentItem item:A-10 ;
+    srk:quantity 1 .
+
+bom:A-20_T-05 a srk:BomLine ;
+    prov:wasAttributedTo system:plm ;
+    srk:childItem item:T-05 ;
+    srk:parentItem item:A-20 ;
+    srk:quantity 1 .
+
+bom:A-20_T-06 a srk:BomLine ;
+    prov:wasAttributedTo system:plm ;
+    srk:childItem item:T-06 ;
+    srk:parentItem item:A-20 ;
+    srk:quantity 2 .
+
+bom:A-20_T-07 a srk:BomLine ;
+    prov:wasAttributedTo system:plm ;
+    srk:childItem item:T-07 ;
+    srk:parentItem item:A-20 ;
+    srk:quantity 1 .
+
+bom:A-30_A-31 a srk:BomLine ;
+    prov:wasAttributedTo system:plm ;
+    srk:childItem item:A-31 ;
+    srk:parentItem item:A-30 ;
+    srk:quantity 1 .
+
+bom:A-30_T-08 a srk:BomLine ;
+    prov:wasAttributedTo system:plm ;
+    srk:childItem item:T-08 ;
+    srk:parentItem item:A-30 ;
+    srk:quantity 1 .
+
+bom:A-30_T-09 a srk:BomLine ;
+    prov:wasAttributedTo system:plm ;
+    srk:childItem item:T-09 ;
+    srk:parentItem item:A-30 ;
+    srk:quantity 1 .
+
+bom:A-31_T-10 a srk:BomLine ;
+    prov:wasAttributedTo system:plm ;
+    srk:childItem item:T-10 ;
+    srk:parentItem item:A-31 ;
+    srk:quantity 1 .
+
+bom:A-31_T-11 a srk:BomLine ;
+    prov:wasAttributedTo system:plm ;
+    srk:childItem item:T-11 ;
+    srk:parentItem item:A-31 ;
+    srk:quantity 2 .
+
+bom:A-31_T-12 a srk:BomLine ;
+    prov:wasAttributedTo system:plm ;
+    srk:childItem item:T-12 ;
+    srk:parentItem item:A-31 ;
+    srk:quantity 1 .
+
+bom:A-40_T-13 a srk:BomLine ;
+    prov:wasAttributedTo system:plm ;
+    srk:childItem item:T-13 ;
+    srk:parentItem item:A-40 ;
+    srk:quantity 2 .
+
+bom:A-40_T-14 a srk:BomLine ;
+    prov:wasAttributedTo system:plm ;
+    srk:childItem item:T-14 ;
+    srk:parentItem item:A-40 ;
+    srk:quantity 1 .
+
+bom:P-100_A-10 a srk:BomLine ;
+    prov:wasAttributedTo system:plm ;
+    srk:childItem item:A-10 ;
+    srk:parentItem item:P-100 ;
+    srk:quantity 1 .
+
+bom:P-100_A-20 a srk:BomLine ;
+    prov:wasAttributedTo system:plm ;
+    srk:childItem item:A-20 ;
+    srk:parentItem item:P-100 ;
+    srk:quantity 1 .
+
+bom:P-100_A-30 a srk:BomLine ;
+    prov:wasAttributedTo system:plm ;
+    srk:childItem item:A-30 ;
+    srk:parentItem item:P-100 ;
+    srk:quantity 1 .
+
+bom:P-100_A-40 a srk:BomLine ;
+    prov:wasAttributedTo system:plm ;
+    srk:childItem item:A-40 ;
+    srk:parentItem item:P-100 ;
+    srk:quantity 1 .
+
+bom:P-200_A-10 a srk:BomLine ;
+    prov:wasAttributedTo system:plm ;
+    srk:childItem item:A-10 ;
+    srk:parentItem item:P-200 ;
+    srk:quantity 1 .
+
+bom:P-200_A-20 a srk:BomLine ;
+    prov:wasAttributedTo system:plm ;
+    srk:childItem item:A-20 ;
+    srk:parentItem item:P-200 ;
+    srk:quantity 1 .
+
+bom:P-200_A-30 a srk:BomLine ;
+    prov:wasAttributedTo system:plm ;
+    srk:childItem item:A-30 ;
+    srk:parentItem item:P-200 ;
+    srk:quantity 1 .
+
+bom:P-300_A-10 a srk:BomLine ;
+    prov:wasAttributedTo system:plm ;
+    srk:childItem item:A-10 ;
+    srk:parentItem item:P-300 ;
+    srk:quantity 1 .
+
+bom:P-300_A-20 a srk:BomLine ;
+    prov:wasAttributedTo system:plm ;
+    srk:childItem item:A-20 ;
+    srk:parentItem item:P-300 ;
+    srk:quantity 1 .
+
+bom:P-300_A-40 a srk:BomLine ;
+    prov:wasAttributedTo system:plm ;
+    srk:childItem item:A-40 ;
+    srk:parentItem item:P-300 ;
+    srk:quantity 1 .
+
+bom:P-400_A-10 a srk:BomLine ;
+    prov:wasAttributedTo system:plm ;
+    srk:childItem item:A-10 ;
+    srk:parentItem item:P-400 ;
+    srk:quantity 1 .
+
+bom:P-400_A-20 a srk:BomLine ;
+    prov:wasAttributedTo system:plm ;
+    srk:childItem item:A-20 ;
+    srk:parentItem item:P-400 ;
+    srk:quantity 1 .
+
+bom:P-400_A-30 a srk:BomLine ;
+    prov:wasAttributedTo system:plm ;
+    srk:childItem item:A-30 ;
+    srk:parentItem item:P-400 ;
+    srk:quantity 1 .
+
+bom:P-400_A-40 a srk:BomLine ;
+    prov:wasAttributedTo system:plm ;
+    srk:childItem item:A-40 ;
+    srk:parentItem item:P-400 ;
+    srk:quantity 1 .
+
+bom:P-500_A-10 a srk:BomLine ;
+    prov:wasAttributedTo system:plm ;
+    srk:childItem item:A-10 ;
+    srk:parentItem item:P-500 ;
+    srk:quantity 1 .
+
+bom:P-500_A-30 a srk:BomLine ;
+    prov:wasAttributedTo system:plm ;
+    srk:childItem item:A-30 ;
+    srk:parentItem item:P-500 ;
+    srk:quantity 1 .
+
+bom:P-500_A-40 a srk:BomLine ;
+    prov:wasAttributedTo system:plm ;
+    srk:childItem item:A-40 ;
+    srk:parentItem item:P-500 ;
+    srk:quantity 1 .
+
+bom:P-500_T-15 a srk:BomLine ;
+    prov:wasAttributedTo system:plm ;
+    srk:childItem item:T-15 ;
+    srk:parentItem item:P-500 ;
+    srk:quantity 2 .
+
+order:O-2026-0001 a srk:Order ;
+    prov:wasAttributedTo system:erp ;
+    srk:identifier "O-2026-0001" ;
+    srk:orderDate "2026-01-02"^^xsd:date ;
+    srk:orderedProduct item:P-200 ;
+    srk:placedBy erp:KD-50007 ;
+    srk:quantity 3000 ;
+    srk:unitPrice 44.90 .
+
+order:O-2026-0002 a srk:Order ;
+    prov:wasAttributedTo system:erp ;
+    srk:identifier "O-2026-0002" ;
+    srk:orderDate "2026-01-06"^^xsd:date ;
+    srk:orderedProduct item:P-300 ;
+    srk:placedBy erp:KD-50009 ;
+    srk:quantity 3600 ;
+    srk:unitPrice 27.80 .
+
+order:O-2026-0003 a srk:Order ;
+    prov:wasAttributedTo system:erp ;
+    srk:identifier "O-2026-0003" ;
+    srk:orderDate "2026-01-17"^^xsd:date ;
+    srk:orderedProduct item:P-300 ;
+    srk:placedBy erp:KD-50014 ;
+    srk:quantity 1550 ;
+    srk:unitPrice 27.80 .
+
+order:O-2026-0004 a srk:Order ;
+    prov:wasAttributedTo system:erp ;
+    srk:identifier "O-2026-0004" ;
+    srk:orderDate "2026-01-25"^^xsd:date ;
+    srk:orderedProduct item:P-100 ;
+    srk:placedBy erp:KD-50008 ;
+    srk:quantity 4900 ;
+    srk:unitPrice 38.50 .
+
+order:O-2026-0005 a srk:Order ;
+    prov:wasAttributedTo system:erp ;
+    srk:identifier "O-2026-0005" ;
+    srk:orderDate "2026-01-30"^^xsd:date ;
+    srk:orderedProduct item:P-300 ;
+    srk:placedBy erp:KD-50015 ;
+    srk:quantity 1600 ;
+    srk:unitPrice 27.80 .
+
+order:O-2026-0006 a srk:Order ;
+    prov:wasAttributedTo system:erp ;
+    srk:identifier "O-2026-0006" ;
+    srk:orderDate "2026-02-02"^^xsd:date ;
+    srk:orderedProduct item:P-400 ;
+    srk:placedBy erp:KD-50013 ;
+    srk:quantity 3900 ;
+    srk:unitPrice 61.20 .
+
+order:O-2026-0007 a srk:Order ;
+    prov:wasAttributedTo system:erp ;
+    srk:identifier "O-2026-0007" ;
+    srk:orderDate "2026-02-05"^^xsd:date ;
+    srk:orderedProduct item:P-200 ;
+    srk:placedBy erp:KD-50010 ;
+    srk:quantity 4600 ;
+    srk:unitPrice 44.90 .
+
+order:O-2026-0008 a srk:Order ;
+    prov:wasAttributedTo system:erp ;
+    srk:identifier "O-2026-0008" ;
+    srk:orderDate "2026-02-06"^^xsd:date ;
+    srk:orderedProduct item:P-300 ;
+    srk:placedBy erp:KD-50011 ;
+    srk:quantity 4550 ;
+    srk:unitPrice 27.80 .
+
+order:O-2026-0009 a srk:Order ;
+    prov:wasAttributedTo system:erp ;
+    srk:identifier "O-2026-0009" ;
+    srk:orderDate "2026-02-10"^^xsd:date ;
+    srk:orderedProduct item:P-100 ;
+    srk:placedBy erp:KD-50009 ;
+    srk:quantity 2500 ;
+    srk:unitPrice 38.50 .
+
+order:O-2026-0010 a srk:Order ;
+    prov:wasAttributedTo system:erp ;
+    srk:identifier "O-2026-0010" ;
+    srk:orderDate "2026-02-13"^^xsd:date ;
+    srk:orderedProduct item:P-500 ;
+    srk:placedBy erp:KD-50004 ;
+    srk:quantity 600 ;
+    srk:unitPrice 73.40 .
+
+order:O-2026-0011 a srk:Order ;
+    prov:wasAttributedTo system:erp ;
+    srk:identifier "O-2026-0011" ;
+    srk:orderDate "2026-02-19"^^xsd:date ;
+    srk:orderedProduct item:P-100 ;
+    srk:placedBy erp:KD-50002 ;
+    srk:quantity 2500 ;
+    srk:unitPrice 38.50 .
+
+order:O-2026-0012 a srk:Order ;
+    prov:wasAttributedTo system:erp ;
+    srk:identifier "O-2026-0012" ;
+    srk:orderDate "2026-03-23"^^xsd:date ;
+    srk:orderedProduct item:P-300 ;
+    srk:placedBy erp:KD-50014 ;
+    srk:quantity 1050 ;
+    srk:unitPrice 27.80 .
+
+order:O-2026-0013 a srk:Order ;
+    prov:wasAttributedTo system:erp ;
+    srk:identifier "O-2026-0013" ;
+    srk:orderDate "2026-04-02"^^xsd:date ;
+    srk:orderedProduct item:P-300 ;
+    srk:placedBy erp:KD-50012 ;
+    srk:quantity 3300 ;
+    srk:unitPrice 27.80 .
+
+order:O-2026-0014 a srk:Order ;
+    prov:wasAttributedTo system:erp ;
+    srk:identifier "O-2026-0014" ;
+    srk:orderDate "2026-04-18"^^xsd:date ;
+    srk:orderedProduct item:P-300 ;
+    srk:placedBy erp:KD-50003 ;
+    srk:quantity 2350 ;
+    srk:unitPrice 27.80 .
+
+order:O-2026-0015 a srk:Order ;
+    prov:wasAttributedTo system:erp ;
+    srk:identifier "O-2026-0015" ;
+    srk:orderDate "2026-05-06"^^xsd:date ;
+    srk:orderedProduct item:P-200 ;
+    srk:placedBy erp:KD-50010 ;
+    srk:quantity 3500 ;
+    srk:unitPrice 44.90 .
+
+order:O-2026-0016 a srk:Order ;
+    prov:wasAttributedTo system:erp ;
+    srk:identifier "O-2026-0016" ;
+    srk:orderDate "2026-05-07"^^xsd:date ;
+    srk:orderedProduct item:P-300 ;
+    srk:placedBy erp:KD-50003 ;
+    srk:quantity 950 ;
+    srk:unitPrice 27.80 .
+
+order:O-2026-0017 a srk:Order ;
+    prov:wasAttributedTo system:erp ;
+    srk:identifier "O-2026-0017" ;
+    srk:orderDate "2026-05-15"^^xsd:date ;
+    srk:orderedProduct item:P-500 ;
+    srk:placedBy erp:KD-50012 ;
+    srk:quantity 3500 ;
+    srk:unitPrice 73.40 .
+
+order:O-2026-0018 a srk:Order ;
+    prov:wasAttributedTo system:erp ;
+    srk:identifier "O-2026-0018" ;
+    srk:orderDate "2026-05-16"^^xsd:date ;
+    srk:orderedProduct item:P-300 ;
+    srk:placedBy erp:KD-50006 ;
+    srk:quantity 3950 ;
+    srk:unitPrice 27.80 .
+
+order:O-2026-0019 a srk:Order ;
+    prov:wasAttributedTo system:erp ;
+    srk:identifier "O-2026-0019" ;
+    srk:orderDate "2026-05-17"^^xsd:date ;
+    srk:orderedProduct item:P-100 ;
+    srk:placedBy erp:KD-50011 ;
+    srk:quantity 4450 ;
+    srk:unitPrice 38.50 .
+
+order:O-2026-0020 a srk:Order ;
+    prov:wasAttributedTo system:erp ;
+    srk:identifier "O-2026-0020" ;
+    srk:orderDate "2026-05-18"^^xsd:date ;
+    srk:orderedProduct item:P-300 ;
+    srk:placedBy erp:KD-50013 ;
+    srk:quantity 2650 ;
+    srk:unitPrice 27.80 .
+
+order:O-2026-0021 a srk:Order ;
+    prov:wasAttributedTo system:erp ;
+    srk:identifier "O-2026-0021" ;
+    srk:orderDate "2026-05-19"^^xsd:date ;
+    srk:orderedProduct item:P-400 ;
+    srk:placedBy erp:KD-50003 ;
+    srk:quantity 2500 ;
+    srk:unitPrice 61.20 .
+
+order:O-2026-0022 a srk:Order ;
+    prov:wasAttributedTo system:erp ;
+    srk:identifier "O-2026-0022" ;
+    srk:orderDate "2026-05-23"^^xsd:date ;
+    srk:orderedProduct item:P-400 ;
+    srk:placedBy erp:KD-50012 ;
+    srk:quantity 2250 ;
+    srk:unitPrice 61.20 .
+
+order:O-2026-0023 a srk:Order ;
+    prov:wasAttributedTo system:erp ;
+    srk:identifier "O-2026-0023" ;
+    srk:orderDate "2026-05-29"^^xsd:date ;
+    srk:orderedProduct item:P-200 ;
+    srk:placedBy erp:KD-50001 ;
+    srk:quantity 5000 ;
+    srk:unitPrice 44.90 .
+
+order:O-2026-0024 a srk:Order ;
+    prov:wasAttributedTo system:erp ;
+    srk:identifier "O-2026-0024" ;
+    srk:orderDate "2026-05-31"^^xsd:date ;
+    srk:orderedProduct item:P-300 ;
+    srk:placedBy erp:KD-50013 ;
+    srk:quantity 800 ;
+    srk:unitPrice 27.80 .
+
+order:O-2026-0025 a srk:Order ;
+    prov:wasAttributedTo system:erp ;
+    srk:identifier "O-2026-0025" ;
+    srk:orderDate "2026-06-02"^^xsd:date ;
+    srk:orderedProduct item:P-100 ;
+    srk:placedBy erp:KD-50009 ;
+    srk:quantity 4100 ;
+    srk:unitPrice 38.50 .
+
+order:O-2026-0026 a srk:Order ;
+    prov:wasAttributedTo system:erp ;
+    srk:identifier "O-2026-0026" ;
+    srk:orderDate "2026-06-11"^^xsd:date ;
+    srk:orderedProduct item:P-200 ;
+    srk:placedBy erp:KD-50002 ;
+    srk:quantity 3700 ;
+    srk:unitPrice 44.90 .
+
+order:O-2026-0027 a srk:Order ;
+    prov:wasAttributedTo system:erp ;
+    srk:identifier "O-2026-0027" ;
+    srk:orderDate "2026-06-15"^^xsd:date ;
+    srk:orderedProduct item:P-100 ;
+    srk:placedBy erp:KD-50015 ;
+    srk:quantity 3900 ;
+    srk:unitPrice 38.50 .
+
+order:O-2026-0028 a srk:Order ;
+    prov:wasAttributedTo system:erp ;
+    srk:identifier "O-2026-0028" ;
+    srk:orderDate "2026-06-16"^^xsd:date ;
+    srk:orderedProduct item:P-500 ;
+    srk:placedBy erp:KD-50015 ;
+    srk:quantity 1500 ;
+    srk:unitPrice 73.40 .
+
+order:O-2026-0029 a srk:Order ;
+    prov:wasAttributedTo system:erp ;
+    srk:identifier "O-2026-0029" ;
+    srk:orderDate "2026-06-22"^^xsd:date ;
+    srk:orderedProduct item:P-200 ;
+    srk:placedBy erp:KD-50003 ;
+    srk:quantity 4950 ;
+    srk:unitPrice 44.90 .
+
+order:O-2026-0030 a srk:Order ;
+    prov:wasAttributedTo system:erp ;
+    srk:identifier "O-2026-0030" ;
+    srk:orderDate "2026-07-05"^^xsd:date ;
+    srk:orderedProduct item:P-300 ;
+    srk:placedBy erp:KD-50009 ;
+    srk:quantity 4100 ;
+    srk:unitPrice 27.80 .
+
+order:O-2026-0031 a srk:Order ;
+    prov:wasAttributedTo system:erp ;
+    srk:identifier "O-2026-0031" ;
+    srk:orderDate "2026-07-05"^^xsd:date ;
+    srk:orderedProduct item:P-100 ;
+    srk:placedBy erp:KD-50008 ;
+    srk:quantity 800 ;
+    srk:unitPrice 38.50 .
+
+order:O-2026-0032 a srk:Order ;
+    prov:wasAttributedTo system:erp ;
+    srk:identifier "O-2026-0032" ;
+    srk:orderDate "2026-07-06"^^xsd:date ;
+    srk:orderedProduct item:P-400 ;
+    srk:placedBy erp:KD-50005 ;
+    srk:quantity 4150 ;
+    srk:unitPrice 61.20 .
+
+order:O-2026-0033 a srk:Order ;
+    prov:wasAttributedTo system:erp ;
+    srk:identifier "O-2026-0033" ;
+    srk:orderDate "2026-07-11"^^xsd:date ;
+    srk:orderedProduct item:P-300 ;
+    srk:placedBy erp:KD-50014 ;
+    srk:quantity 1050 ;
+    srk:unitPrice 27.80 .
+
+order:O-2026-0034 a srk:Order ;
+    prov:wasAttributedTo system:erp ;
+    srk:identifier "O-2026-0034" ;
+    srk:orderDate "2026-07-14"^^xsd:date ;
+    srk:orderedProduct item:P-200 ;
+    srk:placedBy erp:KD-50002 ;
+    srk:quantity 700 ;
+    srk:unitPrice 44.90 .
+
+order:O-2026-0035 a srk:Order ;
+    prov:wasAttributedTo system:erp ;
+    srk:identifier "O-2026-0035" ;
+    srk:orderDate "2026-07-24"^^xsd:date ;
+    srk:orderedProduct item:P-500 ;
+    srk:placedBy erp:KD-50012 ;
+    srk:quantity 2800 ;
+    srk:unitPrice 73.40 .
+
+order:O-2026-0036 a srk:Order ;
+    prov:wasAttributedTo system:erp ;
+    srk:identifier "O-2026-0036" ;
+    srk:orderDate "2026-08-23"^^xsd:date ;
+    srk:orderedProduct item:P-400 ;
+    srk:placedBy erp:KD-50004 ;
+    srk:quantity 2600 ;
+    srk:unitPrice 61.20 .
+
+order:O-2026-0037 a srk:Order ;
+    prov:wasAttributedTo system:erp ;
+    srk:identifier "O-2026-0037" ;
+    srk:orderDate "2026-08-24"^^xsd:date ;
+    srk:orderedProduct item:P-100 ;
+    srk:placedBy erp:KD-50013 ;
+    srk:quantity 4750 ;
+    srk:unitPrice 38.50 .
+
+order:O-2026-0038 a srk:Order ;
+    prov:wasAttributedTo system:erp ;
+    srk:identifier "O-2026-0038" ;
+    srk:orderDate "2026-08-28"^^xsd:date ;
+    srk:orderedProduct item:P-400 ;
+    srk:placedBy erp:KD-50007 ;
+    srk:quantity 3900 ;
+    srk:unitPrice 61.20 .
+
+order:O-2026-0039 a srk:Order ;
+    prov:wasAttributedTo system:erp ;
+    srk:identifier "O-2026-0039" ;
+    srk:orderDate "2026-09-18"^^xsd:date ;
+    srk:orderedProduct item:P-300 ;
+    srk:placedBy erp:KD-50006 ;
+    srk:quantity 950 ;
+    srk:unitPrice 27.80 .
+
+order:O-2026-0040 a srk:Order ;
+    prov:wasAttributedTo system:erp ;
+    srk:identifier "O-2026-0040" ;
+    srk:orderDate "2026-09-29"^^xsd:date ;
+    srk:orderedProduct item:P-200 ;
+    srk:placedBy erp:KD-50013 ;
+    srk:quantity 3550 ;
+    srk:unitPrice 44.90 .
+
+crm:ACC-1001 a srk:CrmAccount ;
+    prov:wasAttributedTo system:crm ;
+    srk:describes customer:f570b95c-9b62-5eb7-a197-57412a9f4967 ;
+    srk:identifier "ACC-1001" ;
+    srk:recordName "Rheinstahl Fahrzeugbau AG" ;
+    srk:vatId "DE786579303" .
+
+crm:ACC-1002 a srk:CrmAccount ;
+    prov:wasAttributedTo system:crm ;
+    srk:describes customer:b9d5a82a-deb0-59a1-bf02-cf51c6966e4d ;
+    srk:identifier "ACC-1002" ;
+    srk:recordName "Voltaris Mobility GmbH" ;
+    srk:vatId "DE126855092" .
+
+crm:ACC-1003 a srk:CrmAccount ;
+    prov:wasAttributedTo system:crm ;
+    srk:describes customer:87df74d9-5f26-5af7-ab0d-4d2e4275ea6b ;
+    srk:identifier "ACC-1003" ;
+    srk:recordName "Hansekraft Automobile SE" ;
+    srk:vatId "DE362950628" .
+
+crm:ACC-1004 a srk:CrmAccount ;
+    prov:wasAttributedTo system:crm ;
+    srk:describes customer:aae219cc-f613-5fa6-9ec0-2249ec397348 ;
+    srk:identifier "ACC-1004" ;
+    srk:recordName "Isartal Motorenwerke AG" ;
+    srk:vatId "DE249827706" .
+
+crm:ACC-1005 a srk:CrmAccount ;
+    prov:wasAttributedTo system:crm ;
+    srk:describes customer:9b0dbafe-8df7-593e-9a01-af71b02718a1 ;
+    srk:identifier "ACC-1005" ;
+    srk:recordName "Moselwerk Fahrzeuge GmbH" ;
+    srk:vatId "DE826600539" .
+
+crm:ACC-1006 a srk:CrmAccount ;
+    prov:wasAttributedTo system:crm ;
+    srk:describes customer:031d0b49-86da-5a45-bd51-d8b0780b41d7 ;
+    srk:identifier "ACC-1006" ;
+    srk:recordName "Oderbruch Nutzfahrzeuge AG" ;
+    srk:vatId "DE734036506" .
+
+crm:ACC-1007 a srk:CrmAccount ;
+    prov:wasAttributedTo system:crm ;
+    srk:describes customer:751d7ca4-f56e-5ce2-9ece-daa2d23b83e3 ;
+    srk:identifier "ACC-1007" ;
+    srk:recordName "Lechfeld E-Mobil GmbH" ;
+    srk:vatId "DE134126396" .
+
+crm:ACC-1008 a srk:CrmAccount ;
+    prov:wasAttributedTo system:crm ;
+    srk:describes customer:a5e42829-6a58-5f98-a385-c33b06f7be0c ;
+    srk:identifier "ACC-1008" ;
+    srk:recordName "Danubia Fahrzeugtechnik GmbH" ;
+    srk:vatId "AT200604502" .
+
+crm:ACC-1009 a srk:CrmAccount ;
+    prov:wasAttributedTo system:crm ;
+    srk:describes customer:131b9f32-1e60-5e91-a7f1-f4ffb697229c ;
+    srk:identifier "ACC-1009" ;
+    srk:recordName "Loire Mobilite SAS" ;
+    srk:vatId "FR349817734" .
+
+crm:ACC-1010 a srk:CrmAccount ;
+    prov:wasAttributedTo system:crm ;
+    srk:describes customer:db9565b0-5670-5664-a74f-f4403c87c646 ;
+    srk:identifier "ACC-1010" ;
+    srk:recordName "Ebro Vehiculos S.L." ;
+    srk:vatId "ES702632297" .
+
+crm:ACC-1011 a srk:CrmAccount ;
+    prov:wasAttributedTo system:crm ;
+    srk:describes customer:8718c0de-5db5-5377-b6c2-de6be5536dba ;
+    srk:identifier "ACC-1011" ;
+    srk:recordName "Padania Automotive S.p.A." ;
+    srk:vatId "IT868820204" .
+
+crm:ACC-1012 a srk:CrmAccount ;
+    prov:wasAttributedTo system:crm ;
+    srk:describes customer:2b4f9104-648a-5ae9-81d0-b34c9ac3ea24 ;
+    srk:identifier "ACC-1012" ;
+    srk:recordName "Moravia Automotive a.s." ;
+    srk:vatId "CZ336696312" .
+
+crm:ACC-1013 a srk:CrmAccount ;
+    prov:wasAttributedTo system:crm ;
+    srk:describes customer:a784ad2e-b7bd-5da7-a606-7b2f485e2dfb ;
+    srk:identifier "ACC-1013" ;
+    srk:recordName "Vistula Auto S.A." ;
+    srk:vatId "PL732719211" .
+
+crm:ACC-1014 a srk:CrmAccount ;
+    prov:wasAttributedTo system:crm ;
+    srk:describes customer:027057a0-6a67-5a57-aa3a-102da90ae17d ;
+    srk:identifier "ACC-1014" ;
+    srk:recordName "Carpathia Motors S.R.L." ;
+    srk:vatId "RO969119330" .
+
+crm:ACC-1015 a srk:CrmAccount ;
+    prov:wasAttributedTo system:crm ;
+    srk:describes customer:8c74a7ae-6f4b-5e26-90f1-debe2f73faae ;
+    srk:identifier "ACC-1015" ;
+    srk:recordName "Nordkap Electric Vehicles AS" ;
+    srk:vatId "NO914763202" .
+
+erp:KD-50001 a srk:ErpCustomerRecord ;
+    prov:wasAttributedTo system:erp ;
+    srk:describes customer:f570b95c-9b62-5eb7-a197-57412a9f4967 ;
+    srk:identifier "KD-50001" ;
+    srk:paymentTermsDays 30 ;
+    srk:recordName "RHEINSTAHL FAHRZEUGBAU" ;
+    srk:vatId "DE786579303" .
+
+erp:KD-50005 a srk:ErpCustomerRecord ;
+    prov:wasAttributedTo system:erp ;
+    srk:describes customer:9b0dbafe-8df7-593e-9a01-af71b02718a1 ;
+    srk:identifier "KD-50005" ;
+    srk:paymentTermsDays 30 ;
+    srk:recordName "MOSELWERK FAHRZEUGE" ;
+    srk:vatId "DE826600539" .
+
+supplier:S1 a srk:Supplier ;
+    rdfs:label "Kupferwerk Hansa GmbH" ;
+    prov:wasAttributedTo system:srm ;
+    srk:country "DE" ;
+    srk:identifier "S1" .
+
+supplier:S2 a srk:Supplier ;
+    rdfs:label "Far East Magnetics Co., Ltd." ;
+    prov:wasAttributedTo system:srm ;
+    srk:country "CN" ;
+    srk:identifier "S2" .
+
+customer:027057a0-6a67-5a57-aa3a-102da90ae17d a srk:Customer ;
+    rdfs:label "Carpathia Motors S.R.L." ;
+    prov:wasDerivedFrom crm:ACC-1014 ;
+    srk:country "RO" ;
+    srk:keyAccountManager "P. Martins" ;
+    srk:segment "Commercial vehicles" .
+
+customer:031d0b49-86da-5a45-bd51-d8b0780b41d7 a srk:Customer ;
+    rdfs:label "Oderbruch Nutzfahrzeuge AG" ;
+    prov:wasDerivedFrom crm:ACC-1006 ;
+    srk:country "DE" ;
+    srk:keyAccountManager "K. Petrova" ;
+    srk:segment "Commercial vehicles" .
+
+customer:131b9f32-1e60-5e91-a7f1-f4ffb697229c a srk:Customer ;
+    rdfs:label "Loire Mobilite SAS" ;
+    prov:wasDerivedFrom crm:ACC-1009 ;
+    srk:country "FR" ;
+    srk:keyAccountManager "F. Dubois" ;
+    srk:segment "OEM" .
+
+customer:2b4f9104-648a-5ae9-81d0-b34c9ac3ea24 a srk:Customer ;
+    rdfs:label "Moravia Automotive a.s." ;
+    prov:wasDerivedFrom crm:ACC-1012 ;
+    srk:country "CZ" ;
+    srk:keyAccountManager "D. Horvat" ;
+    srk:segment "Tier 1" .
+
+customer:751d7ca4-f56e-5ce2-9ece-daa2d23b83e3 a srk:Customer ;
+    rdfs:label "Lechfeld E-Mobil GmbH" ;
+    prov:wasDerivedFrom crm:ACC-1007 ;
+    srk:country "DE" ;
+    srk:keyAccountManager "T. Schneider" ;
+    srk:segment "OEM" .
+
+customer:8718c0de-5db5-5377-b6c2-de6be5536dba a srk:Customer ;
+    rdfs:label "Padania Automotive S.p.A." ;
+    prov:wasDerivedFrom crm:ACC-1011 ;
+    srk:country "IT" ;
+    srk:keyAccountManager "C. Fischer" ;
+    srk:segment "OEM" .
+
+customer:87df74d9-5f26-5af7-ab0d-4d2e4275ea6b a srk:Customer ;
+    rdfs:label "Hansekraft Automobile SE" ;
+    prov:wasDerivedFrom crm:ACC-1003 ;
+    srk:country "DE" ;
+    srk:keyAccountManager "M. Yilmaz" ;
+    srk:segment "OEM" .
+
+customer:8c74a7ae-6f4b-5e26-90f1-debe2f73faae a srk:Customer ;
+    rdfs:label "Nordkap Electric Vehicles AS" ;
+    prov:wasDerivedFrom crm:ACC-1015 ;
+    srk:country "NO" ;
+    srk:keyAccountManager "H. Wagner" ;
+    srk:segment "OEM" .
+
+customer:9b0dbafe-8df7-593e-9a01-af71b02718a1 a srk:Customer ;
+    rdfs:label "Moselwerk Fahrzeuge GmbH" ;
+    prov:wasDerivedFrom crm:ACC-1005 ;
+    srk:country "DE" ;
+    srk:keyAccountManager "L. Hoffmann" ;
+    srk:segment "Tier 1" .
+
+customer:a5e42829-6a58-5f98-a385-c33b06f7be0c a srk:Customer ;
+    rdfs:label "Danubia Fahrzeugtechnik GmbH" ;
+    prov:wasDerivedFrom crm:ACC-1008 ;
+    srk:country "AT" ;
+    srk:keyAccountManager "E. Rossi" ;
+    srk:segment "Tier 1" .
+
+customer:a784ad2e-b7bd-5da7-a606-7b2f485e2dfb a srk:Customer ;
+    rdfs:label "Vistula Auto S.A." ;
+    prov:wasDerivedFrom crm:ACC-1013 ;
+    srk:country "PL" ;
+    srk:keyAccountManager "R. Lindqvist" ;
+    srk:segment "OEM" .
+
+customer:aae219cc-f613-5fa6-9ec0-2249ec397348 a srk:Customer ;
+    rdfs:label "Isartal Motorenwerke AG" ;
+    prov:wasDerivedFrom crm:ACC-1004 ;
+    srk:country "DE" ;
+    srk:keyAccountManager "S. Novak" ;
+    srk:segment "OEM" .
+
+customer:b9d5a82a-deb0-59a1-bf02-cf51c6966e4d a srk:Customer ;
+    rdfs:label "Voltaris Mobility GmbH" ;
+    prov:wasDerivedFrom crm:ACC-1002 ;
+    srk:country "DE" ;
+    srk:keyAccountManager "A. Brandt" ;
+    srk:segment "OEM" .
+
+customer:db9565b0-5670-5664-a74f-f4403c87c646 a srk:Customer ;
+    rdfs:label "Ebro Vehiculos S.L." ;
+    prov:wasDerivedFrom crm:ACC-1010 ;
+    srk:country "ES" ;
+    srk:keyAccountManager "N. Kowalski" ;
+    srk:segment "OEM" .
+
+customer:f570b95c-9b62-5eb7-a197-57412a9f4967 a srk:Customer ;
+    rdfs:label "Rheinstahl Fahrzeugbau AG" ;
+    prov:wasDerivedFrom crm:ACC-1001 ;
+    srk:country "DE" ;
+    srk:keyAccountManager "J. Keller" ;
+    srk:segment "OEM" .
+
+erp:KD-50004 a srk:ErpCustomerRecord ;
+    prov:wasAttributedTo system:erp ;
+    srk:describes customer:aae219cc-f613-5fa6-9ec0-2249ec397348 ;
+    srk:identifier "KD-50004" ;
+    srk:paymentTermsDays 30 ;
+    srk:recordName "ISARTAL MOTORENWERKE" ;
+    srk:vatId "DE249827706" .
+
+erp:KD-50006 a srk:ErpCustomerRecord ;
+    prov:wasAttributedTo system:erp ;
+    srk:describes customer:031d0b49-86da-5a45-bd51-d8b0780b41d7 ;
+    srk:identifier "KD-50006" ;
+    srk:paymentTermsDays 90 ;
+    srk:recordName "ODERBRUCH NUTZFAHRZEUGE" ;
+    srk:vatId "DE734036506" .
+
+erp:KD-50007 a srk:ErpCustomerRecord ;
+    prov:wasAttributedTo system:erp ;
+    srk:describes customer:751d7ca4-f56e-5ce2-9ece-daa2d23b83e3 ;
+    srk:identifier "KD-50007" ;
+    srk:paymentTermsDays 30 ;
+    srk:recordName "LECHFELD E-MOBIL" ;
+    srk:vatId "DE134126396" .
+
+erp:KD-50008 a srk:ErpCustomerRecord ;
+    prov:wasAttributedTo system:erp ;
+    srk:describes customer:a5e42829-6a58-5f98-a385-c33b06f7be0c ;
+    srk:identifier "KD-50008" ;
+    srk:paymentTermsDays 45 ;
+    srk:recordName "DANUBIA FAHRZEUGTECHNIK" ;
+    srk:vatId "AT200604502" .
+
+erp:KD-50010 a srk:ErpCustomerRecord ;
+    prov:wasAttributedTo system:erp ;
+    srk:describes customer:db9565b0-5670-5664-a74f-f4403c87c646 ;
+    srk:identifier "KD-50010" ;
+    srk:paymentTermsDays 45 ;
+    srk:recordName "EBRO VEHICULOS" ;
+    srk:vatId "ES702632297" .
+
+erp:KD-50011 a srk:ErpCustomerRecord ;
+    prov:wasAttributedTo system:erp ;
+    srk:describes customer:8718c0de-5db5-5377-b6c2-de6be5536dba ;
+    srk:identifier "KD-50011" ;
+    srk:paymentTermsDays 90 ;
+    srk:recordName "PADANIA AUTOMOTIVE" ;
+    srk:vatId "IT868820204" .
+
+item:T-01 a srk:Part ;
+    rdfs:label "Copper winding"@en ;
+    prov:wasAttributedTo system:plm ;
+    srk:identifier "T-01" ;
+    srk:suppliedBy supplier:S1 .
+
+item:T-02 a srk:Part ;
+    rdfs:label "NdFeB magnet"@en ;
+    prov:wasAttributedTo system:plm ;
+    srk:identifier "T-02" ;
+    srk:suppliedBy supplier:S2 .
+
+item:T-03 a srk:Part ;
+    rdfs:label "Ball bearing"@en ;
+    prov:wasAttributedTo system:plm ;
+    srk:identifier "T-03" ;
+    srk:suppliedBy supplier:S4,
+        supplier:S6 .
+
+item:T-04 a srk:Part ;
+    rdfs:label "Motor housing"@en ;
+    prov:wasAttributedTo system:plm ;
+    srk:identifier "T-04" ;
+    srk:suppliedBy supplier:S5 .
+
+item:T-05 a srk:Part ;
+    rdfs:label "Worm gear"@en ;
+    prov:wasAttributedTo system:plm ;
+    srk:identifier "T-05" ;
+    srk:suppliedBy supplier:S5,
+        supplier:S6 .
+
+item:T-06 a srk:Part ;
+    rdfs:label "Spur gear"@en ;
+    prov:wasAttributedTo system:plm ;
+    srk:identifier "T-06" ;
+    srk:suppliedBy supplier:S6 .
+
+item:T-07 a srk:Part ;
+    rdfs:label "Gear housing"@en ;
+    prov:wasAttributedTo system:plm ;
+    srk:identifier "T-07" ;
+    srk:suppliedBy supplier:S5 .
+
+item:T-08 a srk:Part ;
+    rdfs:label "ECU housing"@en ;
+    prov:wasAttributedTo system:plm ;
+    srk:identifier "T-08" ;
+    srk:suppliedBy supplier:S5,
+        supplier:S7 .
+
+item:T-09 a srk:Part ;
+    rdfs:label "Connector"@en ;
+    prov:wasAttributedTo system:plm ;
+    srk:identifier "T-09" ;
+    srk:suppliedBy supplier:S3,
+        supplier:S7 .
+
+item:T-10 a srk:Part ;
+    rdfs:label "Microcontroller"@en ;
+    prov:wasAttributedTo system:plm ;
+    srk:identifier "T-10" ;
+    srk:suppliedBy supplier:S3 .
+
+item:T-11 a srk:Part ;
+    rdfs:label "Hall sensor"@en ;
+    prov:wasAttributedTo system:plm ;
+    srk:identifier "T-11" ;
+    srk:suppliedBy supplier:S3,
+        supplier:S7 .
+
+item:T-12 a srk:Part ;
+    rdfs:label "Bare PCB"@en ;
+    prov:wasAttributedTo system:plm ;
+    srk:identifier "T-12" ;
+    srk:suppliedBy supplier:S7 .
+
+item:T-13 a srk:Part ;
+    rdfs:label "Sealing ring"@en ;
+    prov:wasAttributedTo system:plm ;
+    srk:identifier "T-13" ;
+    srk:suppliedBy supplier:S8 .
+
+item:T-14 a srk:Part ;
+    rdfs:label "Screw set"@en ;
+    prov:wasAttributedTo system:plm ;
+    srk:identifier "T-14" ;
+    srk:suppliedBy supplier:S4,
+        supplier:S8 .
+
+item:T-15 a srk:Part ;
+    rdfs:label "Spindle"@en ;
+    prov:wasAttributedTo system:plm ;
+    srk:identifier "T-15" ;
+    srk:suppliedBy supplier:S6 .
+
+supplier:S4 a srk:Supplier ;
+    rdfs:label "Waelzlager Franken GmbH" ;
+    prov:wasAttributedTo system:srm ;
+    srk:country "DE" ;
+    srk:identifier "S4" .
+
+supplier:S8 a srk:Supplier ;
+    rdfs:label "Dichtungstechnik Bodensee GmbH" ;
+    prov:wasAttributedTo system:srm ;
+    srk:country "DE" ;
+    srk:identifier "S8" .
+
+erp:KD-50002 a srk:ErpCustomerRecord ;
+    prov:wasAttributedTo system:erp ;
+    srk:describes customer:b9d5a82a-deb0-59a1-bf02-cf51c6966e4d ;
+    srk:identifier "KD-50002" ;
+    srk:paymentTermsDays 60 ;
+    srk:recordName "VOLTARIS MOBILITY" ;
+    srk:vatId "DE126855092" .
+
+erp:KD-50014 a srk:ErpCustomerRecord ;
+    prov:wasAttributedTo system:erp ;
+    srk:describes customer:027057a0-6a67-5a57-aa3a-102da90ae17d ;
+    srk:identifier "KD-50014" ;
+    srk:paymentTermsDays 30 ;
+    srk:recordName "CARPATHIA MOTORS" ;
+    srk:vatId "RO969119330" .
+
+erp:KD-50015 a srk:ErpCustomerRecord ;
+    prov:wasAttributedTo system:erp ;
+    srk:describes customer:8c74a7ae-6f4b-5e26-90f1-debe2f73faae ;
+    srk:identifier "KD-50015" ;
+    srk:paymentTermsDays 45 ;
+    srk:recordName "NORDKAP ELECTRIC VEHICLES" ;
+    srk:vatId "NO914763202" .
+
+supplier:S3 a srk:Supplier ;
+    rdfs:label "Semicon Nordic AB" ;
+    prov:wasAttributedTo system:srm ;
+    srk:country "SE" ;
+    srk:identifier "S3" .
+
+erp:KD-50003 a srk:ErpCustomerRecord ;
+    prov:wasAttributedTo system:erp ;
+    srk:describes customer:87df74d9-5f26-5af7-ab0d-4d2e4275ea6b ;
+    srk:identifier "KD-50003" ;
+    srk:paymentTermsDays 45 ;
+    srk:recordName "HANSEKRAFT AUTOMOBILE" ;
+    srk:vatId "DE362950628" .
+
+erp:KD-50009 a srk:ErpCustomerRecord ;
+    prov:wasAttributedTo system:erp ;
+    srk:describes customer:131b9f32-1e60-5e91-a7f1-f4ffb697229c ;
+    srk:identifier "KD-50009" ;
+    srk:paymentTermsDays 30 ;
+    srk:recordName "LOIRE MOBILITE" ;
+    srk:vatId "FR349817734" .
+
+erp:KD-50012 a srk:ErpCustomerRecord ;
+    prov:wasAttributedTo system:erp ;
+    srk:describes customer:2b4f9104-648a-5ae9-81d0-b34c9ac3ea24 ;
+    srk:identifier "KD-50012" ;
+    srk:paymentTermsDays 90 ;
+    srk:recordName "MORAVIA AUTOMOTIVE" ;
+    srk:vatId "CZ336696312" .
+
+supplier:S5 a srk:Supplier ;
+    rdfs:label "Praezisionsguss Alb GmbH" ;
+    prov:wasAttributedTo system:srm ;
+    srk:country "DE" ;
+    srk:identifier "S5" .
+
+supplier:S6 a srk:Supplier ;
+    rdfs:label "Getriebeteile Ostalb GmbH" ;
+    prov:wasAttributedTo system:srm ;
+    srk:country "DE" ;
+    srk:identifier "S6" .
+
+supplier:S7 a srk:Supplier ;
+    rdfs:label "Sensorika Brno s.r.o." ;
+    prov:wasAttributedTo system:srm ;
+    srk:country "CZ" ;
+    srk:identifier "S7" .
+
+erp:KD-50013 a srk:ErpCustomerRecord ;
+    prov:wasAttributedTo system:erp ;
+    srk:describes customer:a784ad2e-b7bd-5da7-a606-7b2f485e2dfb ;
+    srk:identifier "KD-50013" ;
+    srk:paymentTermsDays 60 ;
+    srk:recordName "VISTULA AUTO" ;
+    srk:vatId "PL732719211" .
+
+item:A-31 a srk:Assembly ;
+    rdfs:label "PCB assembly"@en ;
+    prov:wasAttributedTo system:plm ;
+    srk:hasDirectComponent item:T-10,
+        item:T-11,
+        item:T-12 ;
+    srk:identifier "A-31" .
+
+item:P-500 a srk:Product ;
+    rdfs:label "Power tailgate drive"@en ;
+    prov:wasAttributedTo system:plm ;
+    srk:hasDirectComponent item:A-10,
+        item:A-30,
+        item:A-40,
+        item:T-15 ;
+    srk:identifier "P-500" .
+
+system:srm a srk:SourceSystem ;
+    rdfs:label "SRM (supplier relationship management)"@en .
+
+item:A-40 a srk:Assembly ;
+    rdfs:label "Sealing kit"@en ;
+    prov:wasAttributedTo system:plm ;
+    srk:hasDirectComponent item:T-13,
+        item:T-14 ;
+    srk:identifier "A-40" .
+
+item:P-400 a srk:Product ;
+    rdfs:label "Sunroof drive"@en ;
+    prov:wasAttributedTo system:plm ;
+    srk:hasDirectComponent item:A-10,
+        item:A-20,
+        item:A-30,
+        item:A-40 ;
+    srk:identifier "P-400" .
+
+item:A-20 a srk:Assembly ;
+    rdfs:label "Gear unit"@en ;
+    prov:wasAttributedTo system:plm ;
+    srk:hasDirectComponent item:T-05,
+        item:T-06,
+        item:T-07 ;
+    srk:identifier "A-20" .
+
+item:A-30 a srk:Assembly ;
+    rdfs:label "Electronic control unit"@en ;
+    prov:wasAttributedTo system:plm ;
+    srk:hasDirectComponent item:A-31,
+        item:T-08,
+        item:T-09 ;
+    srk:identifier "A-30" .
+
+item:P-200 a srk:Product ;
+    rdfs:label "Seat adjustment motor"@en ;
+    prov:wasAttributedTo system:plm ;
+    srk:hasDirectComponent item:A-10,
+        item:A-20,
+        item:A-30 ;
+    srk:identifier "P-200" .
+
+item:P-100 a srk:Product ;
+    rdfs:label "Window lift drive"@en ;
+    prov:wasAttributedTo system:plm ;
+    srk:hasDirectComponent item:A-10,
+        item:A-20,
+        item:A-30,
+        item:A-40 ;
+    srk:identifier "P-100" .
+
+item:A-10 a srk:Assembly ;
+    rdfs:label "Motor unit"@en ;
+    prov:wasAttributedTo system:plm ;
+    srk:hasDirectComponent item:T-01,
+        item:T-02,
+        item:T-03,
+        item:T-04 ;
+    srk:identifier "A-10" .
+
+system:crm a srk:SourceSystem ;
+    rdfs:label "CRM (customer relationship management)"@en .
+
+item:P-300 a srk:Product ;
+    rdfs:label "Wiper motor"@en ;
+    prov:wasAttributedTo system:plm ;
+    srk:hasDirectComponent item:A-10,
+        item:A-20,
+        item:A-40 ;
+    srk:identifier "P-300" .
+
+system:erp a srk:SourceSystem ;
+    rdfs:label "ERP (enterprise resource planning)"@en .
+
+system:plm a srk:SourceSystem ;
+    rdfs:label "PLM (product lifecycle management)"@en .
+

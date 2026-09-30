@@ -1,0 +1,33 @@
+# CQ3: Which products depend on a part that has only one supplier?
+#
+# Groups by part: for every single-sourced part, its sole supplier and the
+# products that contain it at any depth. Aggregation with HAVING finds the
+# parts; the transitive srk:hasComponent (REASONED graph) finds the products.
+#
+# Note: SPARQL does not define the order inside GROUP_CONCAT; it may vary between runs.
+
+PREFIX srk:  <https://example.org/supplier-risk-kg/ontology#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?part ?soleSupplier ?supplierCountry
+       (COUNT(DISTINCT ?product) AS ?productCount)
+       (GROUP_CONCAT(DISTINCT ?productName; separator=", ") AS ?products)
+WHERE {
+  {
+    SELECT ?p WHERE {
+      ?p a srk:Part ;
+         srk:suppliedBy ?s .
+    }
+    GROUP BY ?p
+    HAVING (COUNT(DISTINCT ?s) = 1)
+  }
+  ?p       rdfs:label ?part ;
+           srk:suppliedBy ?supplier .
+  ?supplier rdfs:label ?soleSupplier ;
+           srk:country ?supplierCountry .
+  ?product  a srk:Product ;
+           srk:hasComponent ?p ;
+           rdfs:label ?productName .
+}
+GROUP BY ?part ?soleSupplier ?supplierCountry
+ORDER BY DESC(?productCount) ?part

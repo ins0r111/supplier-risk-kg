@@ -1,0 +1,31 @@
+# CQ1: Which customers are affected if supplier S3 fails?
+#
+# Follows the chain supplier -> part -> product -> order -> customer.
+# Uses two inferred properties, so it must run on the REASONED graph:
+#   srk:hasComponent  transitive closure of the bill of materials
+#   srk:orderedBy     property chain placedBy / describes (ERP -> CRM)
+# Change the supplier in VALUES to ask about another one.
+#
+# Note: SPARQL does not define the order inside GROUP_CONCAT; it may vary between runs.
+
+PREFIX srk:  <https://example.org/supplier-risk-kg/ontology#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?customer ?country ?keyAccountManager
+       (GROUP_CONCAT(DISTINCT ?productName; separator=", ") AS ?affectedProducts)
+       (COUNT(DISTINCT ?order) AS ?openOrders)
+WHERE {
+  VALUES ?supplier { <https://example.org/supplier-risk-kg/id/supplier/S3> }
+
+  ?part    srk:suppliedBy     ?supplier .
+  ?product a srk:Product ;
+           srk:hasComponent   ?part ;
+           rdfs:label         ?productName .
+  ?order   srk:orderedProduct ?product ;
+           srk:orderedBy      ?c .
+  ?c       rdfs:label         ?customer ;
+           srk:keyAccountManager ?keyAccountManager .
+  OPTIONAL { ?c srk:country ?country }
+}
+GROUP BY ?customer ?country ?keyAccountManager
+ORDER BY DESC(?openOrders) ?customer

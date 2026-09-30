@@ -1,0 +1,25 @@
+# CQ4: Which CRM accounts and ERP customers are the same company?
+#
+# Two records describe the same company if both point to the same canonical
+# srk:Customer. ERP records without a match stay in the result with empty
+# CRM columns: they are exactly the records a data steward has to fix.
+# Works on the ASSERTED graph; no reasoning needed.
+
+PREFIX srk:  <https://example.org/supplier-risk-kg/ontology#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?erpId ?erpName ?crmId ?crmName ?vatId
+WHERE {
+  ?erp a srk:ErpCustomerRecord ;
+       srk:identifier ?erpId ;
+       srk:recordName ?erpName ;
+       srk:vatId      ?vatId .
+  OPTIONAL {
+    ?erp srk:describes ?customer .
+    ?crm a srk:CrmAccount ;
+         srk:describes  ?customer ;
+         srk:identifier ?crmId ;
+         srk:recordName ?crmName .
+  }
+}
+ORDER BY BOUND(?crmId) ?erpId

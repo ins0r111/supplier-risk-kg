@@ -1,0 +1,251 @@
+@prefix sh:   <http://www.w3.org/ns/shacl#> .
+@prefix srk:  <https://example.org/supplier-risk-kg/ontology#> .
+@prefix srks: <https://example.org/supplier-risk-kg/shapes#> .
+@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix owl:  <http://www.w3.org/2002/07/owl#> .
+
+# SHACL is validated against the ASSERTED graph (no inference).
+# The ontology is mixed in only for rdfs:subClassOf, so that sh:class srk:Item
+# also accepts products, assemblies and parts. See README: "OWL vs. SHACL".
+
+# ==========================================================================
+# Customers and records
+# ==========================================================================
+
+srks:CustomerShape
+    a sh:NodeShape ;
+    sh:targetClass srk:Customer ;
+    sh:property [
+        sh:path rdfs:label ;
+        sh:minCount 1 ; sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+        sh:message "Every customer has exactly one name." ;
+    ] ;
+    sh:property [
+        sh:path srk:country ;
+        sh:minCount 1 ; sh:maxCount 1 ;
+        sh:pattern "^[A-Z]{2}$" ;
+        sh:message "Every customer has exactly one country." ;
+    ] ;
+    sh:property [
+        sh:path srk:segment ;
+        sh:minCount 1 ; sh:maxCount 1 ;
+        sh:in ( "OEM" "Tier 1" "Commercial vehicles" ) ;
+        sh:message "Every customer belongs to exactly one known segment." ;
+    ] ;
+    sh:property [
+        sh:path prov:wasDerivedFrom ;
+        sh:minCount 1 ; sh:maxCount 1 ;
+        sh:class srk:CrmAccount ;
+        sh:message "Every customer is derived from exactly one CRM account." ;
+    ] .
+
+srks:CrmAccountShape
+    a sh:NodeShape ;
+    sh:targetClass srk:CrmAccount ;
+    sh:property [
+        sh:path srk:identifier ;
+        sh:minCount 1 ; sh:maxCount 1 ;
+        sh:pattern "^ACC-[0-9]{4}$" ;
+        sh:message "Every CRM account has one ID of the form ACC-0000." ;
+    ] ;
+    sh:property [
+        sh:path srk:vatId ;
+        sh:minCount 1 ; sh:maxCount 1 ;
+        sh:pattern "^[A-Z]{2}[0-9]{8,12}$" ;
+        sh:message "Every CRM account has one well-formed VAT ID." ;
+    ] ;
+    sh:property [
+        sh:path srk:describes ;
+        sh:minCount 1 ; sh:maxCount 1 ;
+        sh:class srk:Customer ;
+        sh:message "Every CRM account describes exactly one customer." ;
+    ] .
+
+srks:ErpCustomerRecordShape
+    a sh:NodeShape ;
+    sh:targetClass srk:ErpCustomerRecord ;
+    sh:property [
+        sh:path srk:identifier ;
+        sh:minCount 1 ; sh:maxCount 1 ;
+        sh:pattern "^KD-[0-9]{5}$" ;
+        sh:message "Every ERP customer has one ID of the form KD-00000." ;
+    ] ;
+    sh:property [
+        sh:path srk:vatId ;
+        sh:minCount 1 ; sh:maxCount 1 ;
+        sh:pattern "^[A-Z]{2}[0-9]{8,12}$" ;
+        sh:message "Every ERP customer has one well-formed VAT ID." ;
+    ] ;
+    sh:property [
+        sh:path srk:describes ;
+        sh:minCount 1 ; sh:maxCount 1 ;
+        sh:class srk:Customer ;
+        sh:message "Every ERP customer matches exactly one CRM account via VAT ID." ;
+    ] ;
+    sh:property [
+        sh:path srk:paymentTermsDays ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:integer ;
+        sh:minInclusive 0 ; sh:maxInclusive 120 ;
+        sh:message "Payment terms are between 0 and 120 days." ;
+    ] .
+
+# ==========================================================================
+# Orders
+# ==========================================================================
+
+srks:OrderShape
+    a sh:NodeShape ;
+    sh:targetClass srk:Order ;
+    sh:property [
+        sh:path srk:identifier ;
+        sh:minCount 1 ; sh:maxCount 1 ;
+        sh:pattern "^O-[0-9]{4}-[0-9]{4}$" ;
+        sh:message "Every order has one ID of the form O-YYYY-NNNN." ;
+    ] ;
+    sh:property [
+        sh:path srk:placedBy ;
+        sh:minCount 1 ; sh:maxCount 1 ;
+        sh:class srk:ErpCustomerRecord ;
+        sh:message "Every order is booked against exactly one ERP customer." ;
+    ] ;
+    sh:property [
+        sh:path srk:orderedProduct ;
+        sh:minCount 1 ; sh:maxCount 1 ;
+        sh:class srk:Product ;
+        sh:message "Every order refers to an existing product." ;
+    ] ;
+    sh:property [
+        sh:path srk:quantity ;
+        sh:minCount 1 ; sh:maxCount 1 ;
+        sh:datatype xsd:integer ;
+        sh:minExclusive 0 ;
+        sh:message "Order quantity is a positive integer." ;
+    ] ;
+    sh:property [
+        sh:path srk:unitPrice ;
+        sh:minCount 1 ; sh:maxCount 1 ;
+        sh:datatype xsd:decimal ;
+        sh:minExclusive 0 ;
+        sh:message "Every order has one positive unit price." ;
+    ] ;
+    sh:property [
+        sh:path srk:orderDate ;
+        sh:minCount 1 ; sh:maxCount 1 ;
+        sh:datatype xsd:date ;
+        sh:message "Every order has one order date." ;
+    ] .
+
+# ==========================================================================
+# Items and bill of materials
+# ==========================================================================
+
+srks:ItemShape
+    a sh:NodeShape ;
+    sh:targetClass srk:Product, srk:Assembly, srk:Part ;
+    sh:property [
+        sh:path srk:identifier ;
+        sh:minCount 1 ; sh:maxCount 1 ;
+        sh:pattern "^[PAT]-[0-9]+$" ;
+        sh:message "Every item has one ID starting with P-, A- or T-." ;
+    ] ;
+    sh:property [
+        sh:path rdfs:label ;
+        sh:minCount 1 ;
+        sh:message "Every item has a name." ;
+    ] .
+
+srks:ProductShape
+    a sh:NodeShape ;
+    sh:targetClass srk:Product, srk:Assembly ;
+    sh:property [
+        sh:path srk:hasDirectComponent ;
+        sh:minCount 1 ;
+        sh:class srk:Item ;
+        sh:message "Every product and assembly consists of at least one item." ;
+    ] .
+
+srks:PartShape
+    a sh:NodeShape ;
+    sh:targetClass srk:Part ;
+    sh:property [
+        sh:path srk:suppliedBy ;
+        sh:minCount 1 ;
+        sh:class srk:Supplier ;
+        sh:message "Every part has at least one supplier." ;
+    ] ;
+    sh:property [
+        sh:path srk:hasDirectComponent ;
+        sh:maxCount 0 ;
+        sh:message "A part is purchased as a whole and has no components." ;
+    ] .
+
+srks:BomLineShape
+    a sh:NodeShape ;
+    sh:targetClass srk:BomLine ;
+    sh:property [
+        sh:path srk:parentItem ;
+        sh:minCount 1 ; sh:maxCount 1 ;
+        sh:class srk:Item ;
+        sh:disjoint srk:childItem ;
+        sh:message "A BOM line has one parent item, different from its child." ;
+    ] ;
+    sh:property [
+        sh:path srk:childItem ;
+        sh:minCount 1 ; sh:maxCount 1 ;
+        sh:class srk:Item ;
+        sh:message "A BOM line has one child item." ;
+    ] ;
+    sh:property [
+        sh:path srk:quantity ;
+        sh:minCount 1 ; sh:maxCount 1 ;
+        sh:datatype xsd:integer ;
+        sh:minExclusive 0 ;
+        sh:message "BOM quantity is a positive integer." ;
+    ] .
+
+# SHACL Core cannot follow a path of arbitrary length back to the focus node.
+# A SPARQL-based constraint can: no item may (indirectly) contain itself.
+
+srks:NoBomCycleShape
+    a sh:NodeShape ;
+    sh:targetClass srk:Product, srk:Assembly ;
+    sh:sparql [
+        a sh:SPARQLConstraint ;
+        sh:message "The bill of materials contains a cycle: this item contains itself." ;
+        sh:prefixes srks: ;
+        sh:select """
+            SELECT $this WHERE {
+                $this srk:hasDirectComponent+ $this .
+            }
+        """ ;
+    ] .
+
+srks:
+    sh:declare [
+        sh:prefix "srk" ;
+        sh:namespace "https://example.org/supplier-risk-kg/ontology#"^^xsd:anyURI ;
+    ] .
+
+# ==========================================================================
+# Suppliers
+# ==========================================================================
+
+srks:SupplierShape
+    a sh:NodeShape ;
+    sh:targetClass srk:Supplier ;
+    sh:property [
+        sh:path rdfs:label ;
+        sh:minCount 1 ; sh:maxCount 1 ;
+        sh:message "Every supplier has exactly one name." ;
+    ] ;
+    sh:property [
+        sh:path srk:country ;
+        sh:minCount 1 ; sh:maxCount 1 ;
+        sh:pattern "^[A-Z]{2}$" ;
+        sh:message "Every supplier has exactly one country." ;
+    ] .

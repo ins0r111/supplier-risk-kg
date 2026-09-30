@@ -1,0 +1,27 @@
+[
+  {
+    "file": "crm_accounts.csv",
+    "record": "ACC-1007",
+    "rule": "Every customer has exactly one country."
+  },
+  {
+    "file": "erp_orders.csv",
+    "record": "O-2026-0017",
+    "rule": "Every order refers to an existing product."
+  },
+  {
+    "file": "erp_orders.csv",
+    "record": "O-2026-0023",
+    "rule": "Order quantity is a positive integer."
+  },
+  {
+    "file": "supply.csv",
+    "record": "T-13",
+    "rule": "Every part has at least one supplier."
+  },
+  {
+    "file": "erp_customers.csv",
+    "record": "KD-50012",
+    "rule": "Every ERP customer matches exactly one CRM account via VAT ID."
+  }
+]
