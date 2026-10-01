@@ -1,18 +1,114 @@
-# Supplier-Risk Case Study using OWL, SHACL and SPARQL
+# Supply Chain Risk Knowledge Graph
 
-**A hands-on learning path for knowledge graphs with OWL, SHACL and SPARQL,
-built around one business question:**
+**When a supplier fails, which customers are hit, how much revenue is at
+risk, and who needs to call them? This project answers that in seconds,
+across four business systems that were never designed to talk to each
+other, and every answer can be traced back to its source.**
 
-> **Which customers are affected if supplier X fails?**
+[![CI](https://github.com/ins0r111/supplier-risk-kg/actions/workflows/ci.yml/badge.svg)](https://github.com/ins0r111/supplier-risk-kg/actions/workflows/ci.yml)
 
-The answer is spread across four systems that share no common customer ID.
-It requires following a chain that no single system holds (supplier → part →
-assembly → product → order → customer) through a bill of materials of varying
-depth. This is exactly where plain vector-based RAG struggles and an
-ontology-backed knowledge graph does not.
+## The problem
 
-Everything runs locally in a few seconds, is fully reproducible and is
-covered by tests.
+A mid-sized automotive supplier learns that its only microcontroller
+supplier will stop delivering. Management asks three questions:
+
+1. Which customers are affected?
+2. How much order value is at risk?
+3. Who in sales has to call them, today?
+
+The information exists, but it is scattered:
+
+- **Customers** live in the CRM (sales) *and* in the ERP (orders and
+  invoicing), under different IDs and different spellings:
+  *Vistula Auto S.A.* in one system, *VISTULA AUTO* in the other.
+- **Orders** live in the ERP and only know ERP customer numbers.
+- **Products** are defined in the bill of materials, where the
+  microcontroller sits three levels deep: product → control unit → circuit
+  board → microcontroller.
+- **Suppliers** live in a fourth system.
+
+Answering the question usually means exporting spreadsheets from every
+system and matching them by hand. That is slow, and one typo in a record is
+enough to silently drop a customer from the answer. An AI chatbot reading
+the same documents would have to guess, because the answer is not written
+down anywhere; it has to be *derived*.
+
+## The solution
+
+A knowledge graph that connects the four systems through one shared business
+vocabulary, checks the data before anyone relies on it, and answers the
+question with a single query. This is one of the chains it follows:
+
+```mermaid
+flowchart LR
+    S["Supplier S3<br/>(supplier system)"] -->|delivers| T["Microcontroller"]
+    T -->|built into| B["Circuit board"]
+    B -->|built into| U["Control unit"]
+    U -->|built into| P["Window lift drive<br/>(product data)"]
+    P -->|ordered in| O["Order O-2026-0037<br/>(ERP)"]
+    O -->|booked for| E["ERP customer<br/>KD-50013"]
+    E -->|same company as| C["Vistula Auto S.A.<br/>(CRM)"]
+    C -->|managed by| K["Key account manager<br/>R. Lindqvist"]
+```
+
+No single system contains this chain. The knowledge graph assembles it from
+all four, for every product, order and customer at once.
+
+## The results
+
+| Question | Answer from the knowledge graph |
+|---|---|
+| Which customers are affected if supplier S3 fails? | **13 of 15**, each with the responsible key account manager |
+| How much order value is at risk? | **€4.17 M of €5.08 M (82 %)** |
+| Which parts are a single point of failure? | **9 parts**, including the microcontroller and magnets sourced only from China |
+| Can we trust the data? | **5 data errors** found automatically, each named by its record ID |
+
+## The hidden risk this catches
+
+In the test data, one customer's VAT ID contains a typo in the ERP: two
+digits are swapped. As a result, the ERP record no longer matches the CRM,
+and **Moravia Automotive silently disappears from the list of affected
+customers**. No error message, just a wrong answer that looks right.
+
+The validation layer flags exactly this record before anyone relies on the
+answer. Turning *silent* data problems into *visible* ones is the core of
+trustworthy analytics and of trustworthy AI.
+
+## What this project demonstrates
+
+| Capability | Where to look |
+|---|---|
+| Turning business questions into a data model (competency questions → ontology) | [Competency questions](#competency-questions), `ontology/` |
+| Ontology design with W3C standards (OWL 2, SKOS), incl. a bilingual business glossary | `ontology/supplier-risk.ttl` |
+| Integrating inconsistent enterprise data, with the source of every fact recorded (PROV-O) | `scripts/build_graph.py` |
+| Automated data quality rules (SHACL) | `shapes/supplier-risk-shapes.ttl` |
+| Reasoning and graph queries (OWL 2 RL, SPARQL) | `queries/`, `scripts/query.py` |
+| Engineering discipline: 29 tests checked against independent calculations, CI, fully reproducible builds | `tests/`, `.github/workflows/` |
+| Explaining it to others: the repository doubles as a learning path | [The learning path](#the-learning-path) |
+
+All data is synthetic and all company names are fictional.
+
+## Run it yourself
+
+```bash
+git clone https://github.com/ins0r111/supplier-risk-kg
+cd supplier-risk-kg
+python -m venv .venv && source .venv/bin/activate
+pip install -r requirements.txt
+
+python scripts/generate_data.py   # 1. synthetic source data (clean and with errors)
+python scripts/build_graph.py     # 2. build the knowledge graph
+python scripts/validate.py clean  # 3. check data quality
+python scripts/query.py           # 4. answer the business questions
+pytest                            # 29 tests
+```
+
+---
+
+# The learning path
+
+This repository is also a hands-on introduction to knowledge graphs with
+OWL, SHACL and SPARQL, built around the problem above.
 
 ## Who this is for
 
@@ -29,21 +125,6 @@ needed. Plan for one to two days if you do the exercises.
 - validate data quality with SHACL, and understand why OWL is not a validator
 - answer business questions in SPARQL, including multi-hop questions
 - make the whole pipeline reproducible and tested
-
-## Quick start
-
-```bash
-git clone <this repository>
-cd supplier-risk-kg
-python -m venv .venv && source .venv/bin/activate
-pip install -r requirements.txt
-
-python scripts/generate_data.py   # 1. CSV source data (clean and dirty)
-python scripts/build_graph.py     # 2. RDF graphs in graph/
-python scripts/validate.py clean  # 3. SHACL validation
-python scripts/query.py           # 4. answer the competency questions
-pytest                            # 29 tests
-```
 
 ## The scenario
 
@@ -83,15 +164,13 @@ They come first; the ontology is designed to answer them.
 | 4 | Which CRM accounts and ERP customers are the same company? | `queries/cq4_customer_identity.rq` |
 | 5 | Which records violate the data quality rules? | `shapes/supplier-risk-shapes.ttl` |
 
----
-
-# The learning path
+## The lessons
 
 Each lesson names the files to read, explains the key ideas and ends with
 something to try. Read the code alongside: every file is commented with the
 reasoning behind it.
 
-## Lesson 0: Look at the raw data
+### Lesson 0: Look at the raw data
 
 **Files:** `data/clean/*.csv`, `data/dirty/*.csv`, `scripts/generate_data.py`
 
@@ -103,7 +182,7 @@ documented in `data/dirty/expected_violations.json`.
 errors yourself. Then ask: which of them would a database constraint catch,
 and which would slip through?
 
-## Lesson 1: From tables to triples
+### Lesson 1: From tables to triples
 
 **Files:** `scripts/build_graph.py`, `graph/clean.ttl`
 
@@ -140,7 +219,7 @@ Key ideas:
 **Try it:** open `graph/clean.ttl`, find order `O-2026-0001` and follow the
 links by hand to the customer's name. Count how many hops it takes.
 
-## Lesson 2: Modelling the domain in OWL
+### Lesson 2: Modelling the domain in OWL
 
 **Files:** `ontology/supplier-risk.ttl`, `tests/test_ontology.py`
 
@@ -166,7 +245,7 @@ Key ideas:
 **Try it:** remove `owl:TransitiveProperty` from `srk:hasComponent`, run
 `pytest tests/test_ontology.py` and watch which test fails. Put it back.
 
-## Lesson 3: Letting the reasoner work
+### Lesson 3: Letting the reasoner work
 
 **Files:** `scripts/query.py` (function `reasoned_graph`), `tests/test_build_graph.py`
 
@@ -198,7 +277,7 @@ result into explicit knowledge that every consumer can use.
 country in the data, OWL does not conclude "no country", only "unknown".
 Think about what this means for data validation, then read Lesson 4.
 
-## Lesson 4: Data quality with SHACL
+### Lesson 4: Data quality with SHACL
 
 **Files:** `shapes/supplier-risk-shapes.ttl`, `scripts/validate.py`, `tests/test_shapes.py`
 
@@ -237,7 +316,7 @@ SHACL-SPARQL constraint can, with `$this srk:hasDirectComponent+ $this`.
 in `generate_data.py` and to `expected_violations.json`, and make the tests
 pass again.
 
-## Lesson 5: Answering questions with SPARQL
+### Lesson 5: Answering questions with SPARQL
 
 **Files:** `queries/*.rq`, `scripts/query.py`, `tests/test_queries.py`
 
@@ -273,7 +352,7 @@ CSV files, so a wrong query cannot pass just by agreeing with itself.
 **Try it:** change the supplier in CQ1 from S3 to S2, the only supplier of
 the NdFeB magnets. Why are now all 15 customers affected?
 
-## Lesson 6: Reproducibility and CI
+### Lesson 6: Reproducibility and CI
 
 **Files:** `.github/workflows/ci.yml`, `requirements.txt`
 
